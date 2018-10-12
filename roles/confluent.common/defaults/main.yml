@@ -6,7 +6,15 @@ broker:
     port: 9092
 schemaregistry:
   config:
+    protocol: http
     port: 8081
+ksql:
+  config:
+    protocol: http
+    port: 8088
+connect:
+  config:
+    port: 8083
 confluent:
   package_name: confluent-platform-2.11
   support:
