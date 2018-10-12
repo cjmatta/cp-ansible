@@ -1,4 +1,8 @@
+{% if security_mode == "ccloud" %}
+bootstrap.servers={{ confluent.cloud.broker.endpoint }}
+{% else %}
 bootstrap.servers={% for host in groups['broker'] %}{% if loop.index > 1%},{% endif %}{{ host }}:{{broker.config.port}}{% endfor %}
+{% endif %}
 
 {% for key, value in kafkarest.config.items() %}
 {{key}}={{value}}

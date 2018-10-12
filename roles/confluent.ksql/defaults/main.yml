@@ -9,10 +9,13 @@ ksql:
     KSQL_HEAP_OPTS: "-Xmx3g"
   config:
     application.id: ksql-server
+    consumer.interceptor.classes: io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor
+    producer.interceptor.classes: io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor
     listeners: http://0.0.0.0:8088
     ksql.streams.replication.factor: 3
     ksql.sink.replicas: 3
     ksql.streams.num.standby.replicas: 1
+    ksql.streams.state.dir: /var/lib/kafka-streams
   systemd:
     enabled: yes
     state: started

@@ -1,4 +1,20 @@
+{% if security_mode == "ccloud" %}
+bootstrap.servers={{ confluent.cloud.broker.endpoint }}
+{% else %}
 bootstrap.servers={% for host in groups['broker'] %}{% if loop.index > 1%},{% endif %}{{ host }}:{{broker.config.port}}{% endfor %}
+{% endif %}
+
+{% if 'schema-registry' in groups.keys() %}
+confluent.controlcenter.schema.registry.url={% for host in groups['schema-registry'] %}{% if loop.index > 1%},{% endif %}{{ schemaregistry.config.protocol }}://{{ host }}:{{schemaregistry.config.port}}{% endfor %}
+{% endif %}
+
+
+{% if 'ksql' in groups.keys() %}
+ksql.url={{ ksql.config.protocol }}://{{  groups['ksql'][0] }}:{{ksql.config.port}}
+
+ksql.advertised.url={{ ksql.config.protocol }}://{{  groups['ksql'][0] }}:{{ksql.config.port}}
+{% endif %}
+
 
 {% for key, value in confluent.control.center.config.items() %}
 {{key}}={{value}}
