@@ -15,6 +15,12 @@ ksql:
 connect:
   config:
     port: 8083
+kafka-rest:
+  config:
+    port: 8082
+control_center:
+  config:
+    port: 9021
 confluent:
   package_name: confluent-platform-2.11
   support:
