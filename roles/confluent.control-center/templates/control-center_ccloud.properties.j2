@@ -10,6 +10,3 @@ confluent.controlcenter.streams.retry.backoff.ms=500
 confluent.controlcenter.streams.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="{{ confluent.cloud.api.key }}" password="{{ confluent.cloud.api.secret }}";
 confluent.controlcenter.streams.sasl.mechanism=PLAIN
 
-{% for key, value in confluent.control.center.config.items() %}
-{{key}}={{value}}
-{% endfor %}
